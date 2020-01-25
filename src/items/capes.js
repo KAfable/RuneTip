@@ -1,4 +1,4 @@
-let capes = {
+export default {
 	"3rd age cloak": {
 		ac: 0,
 		al: 0,
