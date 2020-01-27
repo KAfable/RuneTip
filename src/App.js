@@ -1,14 +1,17 @@
 import React from "react";
 import DPSCalculator from "./components/layout/DPSCalculator";
+import GearContext from "./context/gearContext";
 import "./App.css";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      Testing
-      <DPSCalculator />
-    </div>
+    <GearContext.Provider value={GearContext}>
+      <div className="App">
+        Testing
+        <DPSCalculator />
+      </div>
+    </GearContext.Provider>
   );
-}
+};
 
 export default App;
