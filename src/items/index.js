@@ -4,7 +4,7 @@ import capes from "./capes";
 import hands from "./gloves";
 import head from "./head";
 import legs from "./legs";
-import neck from "./neck";
+import necks from "./neck";
 import shields from "./shields";
 import body from "./torso";
 import weapons from "./weapons";
@@ -17,7 +17,7 @@ export {
   hands,
   head,
   legs,
-  neck,
+  necks,
   shields,
   body,
   weapons,

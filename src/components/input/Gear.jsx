@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useReducer } from "react";
+import Autocomplete from "@material-ui/lab/Autocomplete";
+import TextField from "@material-ui/core/TextField";
 import {
   ammo,
   feet,
@@ -6,34 +8,68 @@ import {
   hands,
   head,
   legs,
-  neck,
+  necks,
   shields,
   body,
   weapons,
   rings
 } from "../../items";
 
-import Autocomplete from "@material-ui/lab/Autocomplete";
-import TextField from "@material-ui/core/TextField";
+import gearReducer from "../../context/gearReducer";
+import {
+  EQUIP_FEET,
+  EQUIP_WEAPON,
+  EQUIP_AMMO,
+  EQUIP_CAPE,
+  EQUIP_HANDS,
+  EQUIP_HEAD,
+  EQUIP_LEGS,
+  EQUIP_NECK,
+  EQUIP_SHIELD,
+  EQUIP_BODY,
+  EQUIP_RING
+} from "../../context/types";
+
+const initialState = {
+  gear: {
+    weapon: {},
+    ammo: {},
+    head: {},
+    neck: {},
+    body: {},
+    legs: {},
+    feet: {},
+    cape: {},
+    hands: {},
+    ring: {},
+    shield: {}
+  },
+  gearStats: {
+    aS: "", // attack speed
+    ac: 0, // crush attack
+    al: 0, // slash attack
+    am: 0, // magic attack bonus
+    ar: 0, // ranged attack
+    at: 0, // stab attack
+    bm: 0, // magic str % bonus
+    br: 0, // ranged str bonus
+    bs: 0, // str bonus
+    dc: 0, // crush defense
+    dl: 0, // slash defense
+    dm: 0, // magic defense
+    dr: 0, // ranged defense
+    dt: 0, // stab defense
+    pr: 0, // prayer bonus
+    vi: 0 // ??
+  }
+};
 
 const Gear = () => {
-  const [gear, setGear] = useState({
-    weapon: "",
-    ammo: "",
-    head: "",
-    neck: "",
-    body: "",
-    legs: "",
-    feet: "",
-    cape: "",
-    hands: "",
-    ring: "",
-    shield: ""
-  });
+  const [state, dispatch] = useReducer(gearReducer, initialState);
 
   useEffect(() => {
-    console.log(gear);
-  }, [gear]);
+    console.log(state);
+  }, [state]);
 
   return (
     <form>
@@ -43,8 +79,8 @@ const Gear = () => {
         includeInputInList
         options={Object.keys(weapons)}
         style={{ width: 400 }}
-        onChange={(e, value) => {
-          setGear({ ...gear, weapon: value });
+        onChange={(_, value) => {
+          dispatch({ type: EQUIP_WEAPON, payload: value });
         }}
         renderInput={params => (
           <TextField {...params} fullWidth label="Weapon" margin="normal" />
@@ -60,7 +96,7 @@ const Gear = () => {
           <TextField {...params} fullWidth label="Ammunition" margin="normal" />
         )}
         onChange={(_, value) => {
-          setGear({ ...gear, ammo: value });
+          dispatch({ type: EQUIP_AMMO, payload: value });
         }}
       />
       <Autocomplete
@@ -73,20 +109,20 @@ const Gear = () => {
           <TextField {...params} fullWidth label="Head" margin="normal" />
         )}
         onChange={(_, value) => {
-          setGear({ ...gear, head: value });
+          dispatch({ type: EQUIP_HEAD, payload: value });
         }}
       />
       <Autocomplete
         id="neck"
         autoComplete
         includeInputInList
-        options={Object.keys(neck)}
+        options={Object.keys(necks)}
         style={{ width: 400 }}
         renderInput={params => (
           <TextField {...params} fullWidth label="Neck" margin="normal" />
         )}
         onChange={(_, value) => {
-          setGear({ ...gear, neck: value });
+          dispatch({ type: EQUIP_NECK, payload: value });
         }}
       />
       <Autocomplete
@@ -99,7 +135,7 @@ const Gear = () => {
           <TextField {...params} fullWidth label="Body" margin="normal" />
         )}
         onChange={(_, value) => {
-          setGear({ ...gear, body: value });
+          dispatch({ type: EQUIP_BODY, payload: value });
         }}
       />
       <Autocomplete
@@ -112,7 +148,7 @@ const Gear = () => {
           <TextField {...params} fullWidth label="Legs" margin="normal" />
         )}
         onChange={(_, value) => {
-          setGear({ ...gear, legs: value });
+          dispatch({ type: EQUIP_LEGS, payload: value });
         }}
       />
       <Autocomplete
@@ -125,7 +161,7 @@ const Gear = () => {
           <TextField {...params} fullWidth label="Feet" margin="normal" />
         )}
         onChange={(_, value) => {
-          setGear({ ...gear, feet: value });
+          dispatch({ type: EQUIP_FEET, payload: value });
         }}
       />
       <Autocomplete
@@ -138,7 +174,7 @@ const Gear = () => {
           <TextField {...params} fullWidth label="Cape" margin="normal" />
         )}
         onChange={(_, value) => {
-          setGear({ ...gear, cape: value });
+          dispatch({ type: EQUIP_CAPE, payload: value });
         }}
       />
       <Autocomplete
@@ -151,7 +187,7 @@ const Gear = () => {
           <TextField {...params} fullWidth label="Hands" margin="normal" />
         )}
         onChange={(_, value) => {
-          setGear({ ...gear, hands: value });
+          dispatch({ type: EQUIP_HANDS, payload: value });
         }}
       />
       <Autocomplete
@@ -164,7 +200,7 @@ const Gear = () => {
           <TextField {...params} fullWidth label="Shield" margin="normal" />
         )}
         onChange={(_, value) => {
-          setGear({ ...gear, shield: value });
+          dispatch({ type: EQUIP_SHIELD, payload: value });
         }}
       />
       <Autocomplete
@@ -177,7 +213,7 @@ const Gear = () => {
           <TextField {...params} fullWidth label="Ring" margin="normal" />
         )}
         onChange={(_, value) => {
-          setGear({ ...gear, rings: value });
+          dispatch({ type: EQUIP_RING, payload: value });
         }}
       />
     </form>
