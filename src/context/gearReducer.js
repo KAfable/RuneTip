@@ -1,7 +1,7 @@
 import {
   EQUIP_FEET,
   EQUIP_WEAPON,
-  EQUIP_AMMO,
+  // EQUIP_AMMO,
   EQUIP_CAPE,
   EQUIP_HANDS,
   EQUIP_HEAD,
@@ -13,7 +13,7 @@ import {
 } from "./types";
 
 import {
-  ammo,
+  // ammo,
   feet,
   capes,
   hands,
